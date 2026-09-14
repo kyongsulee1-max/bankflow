@@ -55,6 +55,7 @@ RULES:
 3. If deposit/withdrawal is omitted in a row, represent it as 0.0.
 4. Starting Balance + Total Deposits - Total Withdrawals MUST equal Ending Balance.
 5. Strict Privacy: Never log, store, or output unmasked account numbers.
+6. Currency Detection: Detect the 3-letter ISO currency code (USD, EUR, GBP, CAD, AUD, KRW, JPY, etc.) based on currency symbols ($, €, £, ₩) or the issuing financial institution. If unspecified for US or international banks (e.g., Chase, Mercury, SVB), default to 'USD'.
 """
 
 BANK_STATEMENT_SCHEMA = {
