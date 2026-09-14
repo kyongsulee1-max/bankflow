@@ -1,0 +1,77 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 1866 >>
+stream
+BT
+/F1 15 Tf
+40 750 Td
+(JPMorgan Chase Bank, N.A. - Commercial Checking Statement) Tj
+/F1 9 Tf
+0 -22 Td
+(Financial Institution : Chase Bank) Tj
+0 -13 Td
+(Account Identifier   : ****-****-****-4821) Tj
+0 -13 Td
+(Statement Period     : 2026-09-01 to 2026-09-30 | Currency: USD ($)) Tj
+0 -13 Td
+(Starting Balance     : $25,400.00) Tj
+0 -20 Td
+(========================================================================================================) Tj
+0 -13 Td
+(Date          Description                                       Withdrawal        Deposit        Balance) Tj
+0 -11 Td
+(--------------------------------------------------------------------------------------------------------) Tj
+0 -15 Td
+(2026-09-02   STRIPE PAYOUT BATCH #8821                                    -    +$6,500.00     $31,900.00) Tj
+0 -15 Td
+(2026-09-06   AMAZON WEB SERVICES CLOUD INFRA                       -$480.50             -     $31,419.50) Tj
+0 -15 Td
+(2026-09-12   GOOGLE WORKSPACE & GEMINI API                         -$210.00             -     $31,209.50) Tj
+0 -15 Td
+(2026-09-18   INBOUND WIRE - ACME VENTURES CORP                            -   +$14,200.00     $45,409.50) Tj
+0 -15 Td
+(2026-09-24   GUSTO PAYROLL AUTOMATED TAX DEBIT                   -$8,650.00             -     $36,759.50) Tj
+0 -15 Td
+(2026-09-29   WEWORK DEDICATED OFFICE LEASE                       -$1,250.00             -     $35,509.50) Tj
+0 -15 Td
+(========================================================================================================) Tj
+0 -15 Td
+(AUDIT PROOF & RECONCILIATION SUMMARY:) Tj
+0 -14 Td
+(Starting Balance      : $25,400.00) Tj
+0 -13 Td
+(Total Deposits (+)    : +$20,700.00) Tj
+0 -13 Td
+(Total Withdrawals (-) : -$10,590.50) Tj
+0 -13 Td
+(Calculated Ending     : $35,509.50) Tj
+0 -13 Td
+(Reported Bank Ending  : $35,509.50  |  Variance: $0.00 [BALANCED - 100% MATCH]) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000002159 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2227
+%%EOF

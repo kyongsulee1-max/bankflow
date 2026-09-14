@@ -1,0 +1,75 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 1756 >>
+stream
+BT
+/F1 15 Tf
+40 750 Td
+(Silicon Valley Bank - Commercial Account Monthly Statement) Tj
+/F1 9 Tf
+0 -22 Td
+(Financial Institution : Silicon Valley Bank) Tj
+0 -13 Td
+(Account Identifier   : ****-****-****-3318) Tj
+0 -13 Td
+(Statement Period     : 2026-07-01 to 2026-07-31 | Currency: USD ($)) Tj
+0 -13 Td
+(Starting Balance     : $15,350.00) Tj
+0 -20 Td
+(========================================================================================================) Tj
+0 -13 Td
+(Date          Description                                       Withdrawal        Deposit        Balance) Tj
+0 -11 Td
+(--------------------------------------------------------------------------------------------------------) Tj
+0 -15 Td
+(2026-07-04   CLIENT INVOICE #1092 WIRE PAYMENT                            -    +$7,200.00     $22,550.00) Tj
+0 -15 Td
+(2026-07-11   GITHUB ENTERPRISE & COPILOT SEATS                     -$180.00             -     $22,370.00) Tj
+0 -15 Td
+(2026-07-16   FIGMA DESIGN TEAM ANNUAL LICENSE                      -$340.00             -     $22,030.00) Tj
+0 -15 Td
+(2026-07-23   STRIPE RECURRING SAAS BILLING                                -    +$3,850.00     $25,880.00) Tj
+0 -15 Td
+(2026-07-30   ACCOUNTING CPA QUARTERLY AUDIT FEE                  -$1,200.00             -     $24,680.00) Tj
+0 -15 Td
+(========================================================================================================) Tj
+0 -15 Td
+(AUDIT PROOF & RECONCILIATION SUMMARY:) Tj
+0 -14 Td
+(Starting Balance      : $15,350.00) Tj
+0 -13 Td
+(Total Deposits (+)    : +$11,050.00) Tj
+0 -13 Td
+(Total Withdrawals (-) : -$1,720.00) Tj
+0 -13 Td
+(Calculated Ending     : $24,680.00) Tj
+0 -13 Td
+(Reported Bank Ending  : $24,680.00  |  Variance: $0.00 [BALANCED - 100% MATCH]) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000002049 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2117
+%%EOF

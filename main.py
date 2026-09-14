@@ -25,7 +25,7 @@ if not GEMINI_API_KEY:
     print("WARNING: GEMINI_API_KEY is not set. Please check your .env file.")
 
 ai_client = genai.Client(api_key=GEMINI_API_KEY) if GEMINI_API_KEY else None
-AI_MODEL_ID = "gemini-2.5-flash"
+AI_MODEL_ID = "gemini-2.0-flash"
 
 app = FastAPI(
     title="BankFlow Core Engine",

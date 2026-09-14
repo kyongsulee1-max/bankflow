@@ -1,0 +1,75 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 1761 >>
+stream
+BT
+/F1 15 Tf
+40 750 Td
+(Mercury Technologies / Choice Financial - Treasury Statement) Tj
+/F1 9 Tf
+0 -22 Td
+(Financial Institution : Mercury Technologies) Tj
+0 -13 Td
+(Account Identifier   : ****-****-****-9014) Tj
+0 -13 Td
+(Statement Period     : 2026-08-01 to 2026-08-31 | Currency: USD ($)) Tj
+0 -13 Td
+(Starting Balance     : $82,000.00) Tj
+0 -20 Td
+(========================================================================================================) Tj
+0 -13 Td
+(Date          Description                                       Withdrawal        Deposit        Balance) Tj
+0 -11 Td
+(--------------------------------------------------------------------------------------------------------) Tj
+0 -15 Td
+(2026-08-03   ANGEL INVESTMENT TRANCHE A WIRE                              -   +$50,000.00    $132,000.00) Tj
+0 -15 Td
+(2026-08-10   VERCEL PRO EDGE HOSTING & WORKERS                     -$360.00             -    $131,640.00) Tj
+0 -15 Td
+(2026-08-17   OPENAI PLATFORM API INVOICE #8912                     -$920.00             -    $130,720.00) Tj
+0 -15 Td
+(2026-08-22   LEMON SQUEEZY MERCHANT SETTLEMENT                            -    +$8,400.00    $139,120.00) Tj
+0 -15 Td
+(2026-08-28   CONTRACTOR DEVELOPMENT PAYMENT                      -$4,500.00             -    $134,620.00) Tj
+0 -15 Td
+(========================================================================================================) Tj
+0 -15 Td
+(AUDIT PROOF & RECONCILIATION SUMMARY:) Tj
+0 -14 Td
+(Starting Balance      : $82,000.00) Tj
+0 -13 Td
+(Total Deposits (+)    : +$58,400.00) Tj
+0 -13 Td
+(Total Withdrawals (-) : -$5,780.00) Tj
+0 -13 Td
+(Calculated Ending     : $134,620.00) Tj
+0 -13 Td
+(Reported Bank Ending  : $134,620.00  |  Variance: $0.00 [BALANCED - 100% MATCH]) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000002054 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+2122
+%%EOF
