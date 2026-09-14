@@ -110,7 +110,7 @@
   <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[340px] bg-gradient-to-tr from-indigo-950/40 via-blue-900/20 to-transparent blur-[110px] pointer-events-none -z-10 animate-glow-pulse"></div>
 
   <!-- 1. NAVIGATION BAR -->
-  <header class="sticky top-0 z-50 w-full border-b border-white/[0.06] bg-[#09090B]/80 backdrop-blur-xl transition-all duration-200">
+  <header class="sticky top-0 z-40 w-full border-b border-white/[0.06] bg-[#09090B]/80 backdrop-blur-xl transition-all duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       
       <!-- Brand Logo -->
@@ -226,7 +226,6 @@
 
           <!-- 3-Node Architecture Showcase -->
           <div class="grid grid-cols-1 md:grid-cols-11 gap-4 items-center">
-            
             <!-- Left Node: Raw PDF -->
             <div class="md:col-span-4 rounded-xl bg-[#09090B]/90 border border-white/[0.08] p-4 group hover:border-slate-600 transition-all">
               <div class="flex items-center justify-between mb-3">
@@ -238,7 +237,6 @@
                 </div>
                 <span class="text-[10px] font-mono text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded">Unstructured</span>
               </div>
-              
               <div class="space-y-2 font-mono text-[11px] text-slate-400 bg-black/40 p-3 rounded-lg border border-white/[0.04]">
                 <div class="flex justify-between border-b border-white/[0.05] pb-1 text-[10px] text-slate-500">
                   <span>DESCRIPTION</span>
@@ -260,10 +258,6 @@
                   <div class="text-[9px] text-slate-500">GROSS SALES SETTLEMENT</div>
                 </div>
               </div>
-              <div class="mt-3 text-[10px] text-slate-400 flex items-center justify-between">
-                <span>Multi-line wrapped columns</span>
-                <span class="text-amber-400/90 font-medium">Split line rows</span>
-              </div>
             </div>
 
             <!-- Middle Connector Node -->
@@ -273,7 +267,6 @@
               </div>
               <div class="mt-2 text-xs font-bold text-blue-400 tracking-wide">RAM Engine</div>
               <div class="text-[10px] font-mono text-slate-400 mt-0.5">Double-Entry Verification</div>
-              
               <div class="flex items-center gap-1 mt-2 text-emerald-400 font-mono text-[10px] bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
                 <i data-lucide="check" class="w-3 h-3"></i>
                 <span>Variance: $0.00</span>
@@ -291,13 +284,11 @@
                 </div>
                 <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">2 Formatted Sheets</span>
               </div>
-
               <div class="space-y-2 font-mono text-[11px] bg-black/40 p-3 rounded-lg border border-white/[0.04]">
                 <div class="flex items-center gap-2 border-b border-white/[0.08] pb-1.5 text-[10px]">
                   <span class="bg-emerald-500/20 text-emerald-300 font-semibold px-2 py-0.5 rounded border border-emerald-500/30">Sheet 1: Summary</span>
                   <span class="text-slate-500 px-1 py-0.5">Sheet 2: Ledger</span>
                 </div>
-
                 <div class="grid grid-cols-2 gap-2 text-[10px] pt-1">
                   <div class="bg-slate-900/80 p-1.5 rounded border border-white/[0.05]">
                     <div class="text-slate-500 text-[9px]">STARTING BALANCE</div>
@@ -308,19 +299,12 @@
                     <div class="font-bold text-slate-200">$51,260.30</div>
                   </div>
                 </div>
-
                 <div class="flex justify-between items-center text-[10px] pt-1 border-t border-white/[0.05]">
                   <span class="text-slate-400">DOUBLE-ENTRY CHECK</span>
                   <span class="text-emerald-400 font-bold">100% RECONCILED</span>
                 </div>
               </div>
-
-              <div class="mt-3 text-[10px] text-slate-400 flex items-center justify-between">
-                <span>Native Formulas</span>
-                <span class="text-blue-400 font-medium">Categorized Rows</span>
-              </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -328,7 +312,12 @@
       <!-- 3. CORE INTERACTIVE DROPZONE COMPONENT -->
       <div id="reconciliation" class="max-w-3xl mx-auto">
         <div class="text-center mb-6">
-          <span id="dropzonePreLabel" class="text-xs font-bold uppercase tracking-widest text-blue-400">Live Ingestor</span>
+          <!-- 3 FREE TRIAL BADGE -->
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/30 mb-3 shadow-lg shadow-amber-950/20">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            <span id="creditPillText">3 Free Conversions Remaining</span>
+          </div>
+
           <h2 id="dropzoneMainTitle" class="text-2xl sm:text-3xl font-bold text-white mt-1">Convert Your Bank Statement</h2>
           <p id="dropzoneMainSub" class="text-sm text-slate-400 mt-1">Files are analyzed in memory and immediately discarded.</p>
         </div>
@@ -360,8 +349,6 @@
             <!-- STATE B: PROCESSING / LOADING STATE -->
             <div id="stateProcessing" class="hidden relative z-10 py-4">
               <div class="flex flex-col items-center">
-                
-                <!-- Spinner -->
                 <div class="relative w-16 h-16 mb-6">
                   <div class="w-16 h-16 rounded-full border-4 border-blue-500/20 border-t-blue-500 animate-spin"></div>
                   <div class="absolute inset-0 flex items-center justify-center text-blue-400">
@@ -372,9 +359,7 @@
                 <h3 id="procTitle" class="text-lg font-bold text-white mb-1">In-Memory Transformation Active</h3>
                 <p class="text-xs font-mono text-slate-400 mb-6">RAM Buffer Enclave PID #84092</p>
 
-                <!-- Sequential Real-time Status Steps -->
                 <div class="w-full max-w-md space-y-3 text-left font-mono text-xs">
-                  <!-- Step 1 -->
                   <div id="step1" class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.05] text-slate-400 transition-all">
                     <div class="flex items-center gap-3">
                       <span class="w-4 h-4 rounded-full border border-slate-500 flex items-center justify-center text-[10px]">1</span>
@@ -383,7 +368,6 @@
                     <span id="step1Status" class="text-[10px] text-blue-400">Allocating...</span>
                   </div>
 
-                  <!-- Step 2 -->
                   <div id="step2" class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.05] text-slate-400 transition-all">
                     <div class="flex items-center gap-3">
                       <span class="w-4 h-4 rounded-full border border-slate-500 flex items-center justify-center text-[10px]">2</span>
@@ -392,7 +376,6 @@
                     <span id="step2Status" class="text-[10px] text-slate-500">Waiting</span>
                   </div>
 
-                  <!-- Step 3 -->
                   <div id="step3" class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.05] text-slate-400 transition-all">
                     <div class="flex items-center gap-3">
                       <span class="w-4 h-4 rounded-full border border-slate-500 flex items-center justify-center text-[10px]">3</span>
@@ -402,7 +385,6 @@
                   </div>
                 </div>
 
-                <!-- Progress Bar -->
                 <div class="w-full max-w-md bg-white/[0.08] h-1.5 rounded-full overflow-hidden mt-6">
                   <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-emerald-400 h-full w-0 transition-all duration-500"></div>
                 </div>
@@ -437,32 +419,12 @@
                   </div>
                 </div>
 
-                <!-- Ledger Audit Grid -->
-                <div class="bg-black/50 rounded-lg p-3 font-mono text-xs text-slate-300 border border-white/[0.05] mb-5">
-                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
-                    <div class="p-2 rounded bg-slate-900/60 border border-white/[0.04]">
-                      <div class="text-[10px] text-slate-500 uppercase">Starting Balance</div>
-                      <div class="text-sm font-bold text-white mt-0.5" id="summaryStartBal">Verified</div>
-                    </div>
-                    <div class="p-2 rounded bg-slate-900/60 border border-white/[0.04]">
-                      <div class="text-[10px] text-emerald-400 uppercase">Inflow & Credits</div>
-                      <div class="text-sm font-bold text-emerald-400 mt-0.5" id="summaryInflow">Included</div>
-                    </div>
-                    <div class="p-2 rounded bg-slate-900/60 border border-white/[0.04]">
-                      <div class="text-[10px] text-rose-400 uppercase">Outflow & Debits</div>
-                      <div class="text-sm font-bold text-rose-400 mt-0.5" id="summaryOutflow">Audited</div>
-                    </div>
-                    <div class="p-2 rounded bg-slate-900/60 border border-white/[0.04]">
-                      <div class="text-[10px] text-slate-500 uppercase">Reconciled Ending</div>
-                      <div class="text-sm font-bold text-emerald-300 mt-0.5" id="summaryEndBal">Balanced</div>
-                    </div>
-                  </div>
-                  <div class="mt-2 text-center text-[10px] text-slate-400" id="auditEquationText">
-                    Mathematical Ledger Integrity: <span class="text-emerald-400 font-bold">100% In-Memory Reconciliation Passed</span>
+                <div class="bg-black/50 rounded-lg p-3 font-mono text-xs text-slate-300 border border-white/[0.05] mb-5 text-center">
+                  <div class="text-xs text-emerald-400 font-semibold" id="auditEquationText">
+                    Mathematical Ledger Integrity: 100% In-Memory Reconciliation Passed
                   </div>
                 </div>
 
-                <!-- Card Actions -->
                 <div class="flex flex-wrap items-center justify-between gap-3">
                   <div class="text-[11px] text-slate-400 flex items-center gap-1.5">
                     <i data-lucide="trash-2" class="w-3.5 h-3.5 text-rose-400"></i>
@@ -493,10 +455,60 @@
     </div>
   </section>
 
+  <!-- PAYWALL MODAL POPUP (3회 소진 시 노출) -->
+  <div id="paywallModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="relative w-full max-w-lg rounded-2xl glass-panel p-6 sm:p-8 border-2 border-blue-500/40 shadow-2xl bg-[#09090B]">
+      
+      <!-- Close Button -->
+      <button type="button" onclick="closePaywallModal()" class="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.08] transition-all">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center">
+        <div class="w-14 h-14 rounded-2xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 mx-auto mb-4">
+          <i data-lucide="sparkles" class="w-7 h-7"></i>
+        </div>
+
+        <span class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30" id="paywallBadge">
+          Free Limit Reached (3/3 Used)
+        </span>
+
+        <h3 class="text-xl sm:text-2xl font-bold text-white mt-3" id="paywallTitle">
+          Unlock Unlimited Financial Extractions
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-400 mt-2 leading-relaxed" id="paywallDesc">
+          You've used all 3 free conversions. Get instant lifetime access with zero monthly subscriptions.
+        </p>
+
+        <!-- Pricing Buttons in Modal -->
+        <div class="mt-6 space-y-3">
+          <a href="#pricing" onclick="closePaywallModal()" class="block w-full py-3 px-4 rounded-xl text-center text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-lg shadow-blue-600/40 transition-all">
+            <span id="paywallBtnBookkeeper">Get Bookkeeper Pass ($99) — 3,000 Pages</span>
+          </a>
+          <a href="#pricing" onclick="closePaywallModal()" class="block w-full py-3 px-4 rounded-xl text-center text-sm font-bold text-slate-200 bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.1] transition-all">
+            <span id="paywallBtnStarter">Get Starter Pass ($39) — 500 Pages</span>
+          </a>
+        </div>
+
+        <!-- License Key Unlock -->
+        <div class="mt-6 pt-5 border-t border-white/[0.08]">
+          <p class="text-xs text-slate-400 mb-2" id="paywallKeyPrompt">Already have a license key?</p>
+          <div class="flex gap-2">
+            <input type="text" id="licenseKeyInput" placeholder="Enter License Key" class="flex-1 px-3.5 py-2 rounded-xl bg-black/60 border border-white/[0.1] text-xs text-white font-mono placeholder:text-slate-600 focus:outline-none focus:border-blue-500" />
+            <button type="button" onclick="activateLicenseKey()" class="px-4 py-2 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-500 transition-all">
+              Activate
+            </button>
+          </div>
+          <p id="licenseKeyMsg" class="text-[11px] mt-1.5 hidden"></p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
   <!-- 4. "WHY TRADITIONAL OCR FAILS" FEATURE GRID -->
   <section id="comparison" class="py-20 border-t border-white/[0.06] relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
       <div class="text-center max-w-3xl mx-auto mb-16">
         <span id="whyPre" class="text-xs font-bold uppercase tracking-widest text-emerald-400">Accuracy Analysis</span>
         <h2 id="whyTitle" class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Why Traditional OCR Fails at Bank Statements</h2>
@@ -506,8 +518,6 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        <!-- Card 1: Math Integrity -->
         <div class="glass-panel glass-panel-hover rounded-2xl p-8 transition-all duration-300 flex flex-col justify-between group">
           <div>
             <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
@@ -515,21 +525,11 @@
             </div>
             <h3 id="card1Title" class="text-xl font-bold text-white mb-2">Continuous Reconciliation</h3>
             <p id="card1Body" class="text-sm text-slate-300 leading-relaxed">
-              Continuous Reconciliation — starting to ending balance calculation. If a single digit or transaction is missed, the system flags the mathematical imbalance rather than outputting erroneous figures.
+              Continuous Reconciliation — starting to ending balance calculation. If a single digit or transaction is missed, the system flags the mathematical imbalance.
             </p>
-          </div>
-          <div class="mt-8 pt-4 border-t border-white/[0.06]">
-            <div class="font-mono text-xs bg-black/40 p-3 rounded-lg border border-white/[0.04] text-slate-400">
-              <div class="text-[10px] text-emerald-400 mb-1">AUDIT VERIFICATION</div>
-              <div class="flex justify-between">
-                <span>Start + Σ(In) - Σ(Out)</span>
-                <span class="text-emerald-400 font-bold">= End Bal</span>
-              </div>
-            </div>
           </div>
         </div>
 
-        <!-- Card 2: Zero-Storage Privacy -->
         <div class="glass-panel glass-panel-hover rounded-2xl p-8 transition-all duration-300 flex flex-col justify-between group">
           <div>
             <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform">
@@ -537,21 +537,11 @@
             </div>
             <h3 id="card2Title" class="text-xl font-bold text-white mb-2">Zero-Storage Privacy</h3>
             <p id="card2Body" class="text-sm text-slate-300 leading-relaxed">
-              Processed purely in RAM. Never saved to disks, databases, or S3. Financial statements contain confidential accounts and counterparties that must never sit inside an unmonitored cloud bucket.
+              Processed purely in RAM. Never saved to disks, databases, or S3. Financial statements contain confidential accounts that must never sit inside an unmonitored bucket.
             </p>
-          </div>
-          <div class="mt-8 pt-4 border-t border-white/[0.06]">
-            <div class="font-mono text-xs bg-black/40 p-3 rounded-lg border border-white/[0.04] text-slate-400">
-              <div class="text-[10px] text-blue-400 mb-1">RAM ENCLAVE</div>
-              <div class="flex justify-between">
-                <span>Storage Footprint:</span>
-                <span class="text-blue-300 font-bold">0 Bytes Stored</span>
-              </div>
-            </div>
           </div>
         </div>
 
-        <!-- Card 3: Dual-Sheet Output -->
         <div class="glass-panel glass-panel-hover rounded-2xl p-8 transition-all duration-300 flex flex-col justify-between group">
           <div>
             <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition-transform">
@@ -559,20 +549,10 @@
             </div>
             <h3 id="card3Title" class="text-xl font-bold text-white mb-2">Dual-Sheet Formatted Output</h3>
             <p id="card3Body" class="text-sm text-slate-300 leading-relaxed">
-              Executive KPI summary + categorized transaction ledger with live Excel formulas. Every workbook arrives ready for QuickBooks, Xero, or financial audits without manual column reformatting.
+              Executive KPI summary + categorized transaction ledger with live Excel formulas. Every workbook arrives ready for QuickBooks, Xero, or audits.
             </p>
           </div>
-          <div class="mt-8 pt-4 border-t border-white/[0.06]">
-            <div class="font-mono text-xs bg-black/40 p-3 rounded-lg border border-white/[0.04] text-slate-400">
-              <div class="text-[10px] text-indigo-400 mb-1">DYNAMIC WORKBOOK</div>
-              <div class="flex justify-between">
-                <span>Formulas:</span>
-                <span class="text-indigo-300 font-bold">=SUM(), =SUBTOTAL()</span>
-              </div>
-            </div>
-          </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -580,7 +560,6 @@
   <!-- 5. PRICING SECTION (LIFETIME LICENSE MODEL) -->
   <section id="pricing" class="py-20 border-t border-white/[0.06] relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      
       <div class="text-center max-w-3xl mx-auto mb-14">
         <span id="pricePre" class="text-xs font-bold uppercase tracking-widest text-blue-400">Lifetime License Model</span>
         <h2 id="priceTitle" class="text-3xl sm:text-4xl font-extrabold text-white mt-2">Pay Once. Reconcile Forever.</h2>
@@ -589,9 +568,7 @@
         </p>
       </div>
 
-      <!-- Side-by-side Pricing Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        
         <!-- Card 1: Starter Pass -->
         <div class="rounded-2xl glass-panel p-8 flex flex-col justify-between border border-white/[0.08] hover:border-white/[0.18] transition-all">
           <div>
@@ -607,36 +584,16 @@
             </div>
 
             <ul class="space-y-3.5 text-sm text-slate-300">
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-                <span id="starterF1"><strong>500</strong> Statement Pages</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-                <span id="starterF2">Automated Audit Check</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-                <span id="starterF3">.XLSX Dual-Sheet Export</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-                <span id="starterF4">Zero-Storage Ephemeral RAM</span>
-              </li>
-              <li class="flex items-center gap-3 text-slate-400">
-                <i data-lucide="x" class="w-4 h-4 text-slate-600 flex-shrink-0"></i>
-                <span id="starterF5">Multi-Account Batch Processing</span>
-              </li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span><strong>500</strong> Statement Pages</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>Automated Audit Check</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>.XLSX Dual-Sheet Export</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>Zero-Storage Ephemeral RAM</span></li>
             </ul>
           </div>
 
           <div class="mt-8 pt-6 border-t border-white/[0.06]">
-            <a 
-              href="https://bankflow.lemonsqueezy.com/checkout/buy/starter-pass" 
-              id="btnBuyStarter"
-              class="lemonsqueezy-button block w-full py-3 px-4 rounded-xl text-center text-sm font-bold text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.1] transition-all"
-            >
-              Get Starter Pass ($39)
+            <a href="https://bankflow.lemonsqueezy.com/checkout/buy/starter-pass" class="lemonsqueezy-button block w-full py-3 px-4 rounded-xl text-center text-sm font-bold text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.1] transition-all">
+              <span id="btnBuyStarter">Get Starter Pass ($39)</span>
             </a>
             <p id="starterFooterNote" class="text-center text-[10px] text-slate-500 mt-2">Instant License Key • Credits Never Expire</p>
           </div>
@@ -644,7 +601,6 @@
 
         <!-- Card 2: Bookkeeper Pass -->
         <div class="rounded-2xl glass-panel p-8 flex flex-col justify-between border-2 border-blue-500/50 relative shadow-2xl shadow-blue-950/40 bg-gradient-to-b from-blue-950/20 via-slate-900/60 to-[#09090B]">
-          
           <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
             <span id="planProBadge" class="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-blue-600 to-emerald-500 text-white shadow-lg shadow-blue-500/30">
               Popular • For Firms & CPAs
@@ -664,36 +620,16 @@
             </div>
 
             <ul class="space-y-3.5 text-sm text-slate-200">
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-                <span id="proF1"><strong>3,000</strong> Statement Pages</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-                <span id="proF2">Multi-Account Batch Processing</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-                <span id="proF3">Priority Engine (&lt; 2s per statement)</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-                <span id="proF4">Custom Category Rules Mapping</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <i data-lucide="check" class="w-4 h-4 text-emerald-400 flex-shrink-0"></i>
-                <span id="proF5">VIP Priority Support</span>
-              </li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span><strong>3,000</strong> Statement Pages</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>Multi-Account Batch Processing</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>Priority Engine (&lt; 2s per statement)</span></li>
+              <li class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span>VIP Priority Support</span></li>
             </ul>
           </div>
 
           <div class="mt-8 pt-6 border-t border-white/[0.08]">
-            <a 
-              href="https://bankflow.lemonsqueezy.com/checkout/buy/bookkeeper-pass" 
-              id="btnBuyPro"
-              class="lemonsqueezy-button block w-full py-3 px-4 rounded-xl text-center text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-lg shadow-blue-600/40 transition-all"
-            >
-              Get Bookkeeper Pass ($99)
+            <a href="https://bankflow.lemonsqueezy.com/checkout/buy/bookkeeper-pass" class="lemonsqueezy-button block w-full py-3 px-4 rounded-xl text-center text-sm font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 shadow-lg shadow-blue-600/40 transition-all">
+              <span id="btnBuyPro">Get Bookkeeper Pass ($99)</span>
             </a>
             <p id="proFooterNote" class="text-center text-[10px] text-slate-400 mt-2 flex items-center justify-center gap-1.5">
               <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i>
@@ -701,9 +637,7 @@
             </p>
           </div>
         </div>
-
       </div>
-
     </div>
   </section>
 
@@ -712,37 +646,82 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="flex items-center gap-3">
-          <div class="w-6 h-6 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xs">
-            B
-          </div>
-          <div>
-            <span class="text-white font-semibold">BankFlow</span> &copy; 2026. All rights reserved.
-          </div>
+          <div class="w-6 h-6 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-xs">B</div>
+          <div><span class="text-white font-semibold">BankFlow</span> &copy; 2026. All rights reserved.</div>
         </div>
-
         <div class="flex items-center gap-6 font-mono text-[11px] text-slate-400">
           <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> SOC2-Type II Ready</span>
           <span>100% In-Memory Processing</span>
           <span>Zero Data Retention</span>
         </div>
-
-        <div class="flex items-center gap-6">
-          <a href="#security" class="hover:text-white transition-colors">Security Specs</a>
-          <a href="#" class="hover:text-white transition-colors">Terms</a>
-          <a href="mailto:support@bankflow.io" class="hover:text-white transition-colors flex items-center gap-1">
-            <i data-lucide="mail" class="w-3.5 h-3.5"></i>
-            Support
-          </a>
-        </div>
       </div>
     </div>
   </footer>
 
-  <!-- MULTILINGUAL DICTIONARY & REAL BACKEND SCRIPT -->
+  <!-- SCRIPT & ENGINE -->
   <script>
     lucide.createIcons();
 
-    // 1. 다국어 사전 (i18n)
+    // 1. Credit Manager (3 Free Conversions via localStorage)
+    const STORAGE_CREDITS = 'bankflow_free_credits';
+    const STORAGE_UNLOCKED = 'bankflow_is_unlocked';
+
+    function getRemainingCredits() {
+      if (localStorage.getItem(STORAGE_UNLOCKED) === 'true') return 9999;
+      const val = localStorage.getItem(STORAGE_CREDITS);
+      return val === null ? 3 : parseInt(val, 10);
+    }
+
+    function useOneCredit() {
+      if (localStorage.getItem(STORAGE_UNLOCKED) === 'true') return;
+      const current = getRemainingCredits();
+      if (current > 0) {
+        localStorage.setItem(STORAGE_CREDITS, current - 1);
+        updateCreditDisplay();
+      }
+    }
+
+    function updateCreditDisplay() {
+      const credits = getRemainingCredits();
+      const pill = document.getElementById('creditPillText');
+      if (localStorage.getItem(STORAGE_UNLOCKED) === 'true') {
+        pill.innerText = currentLang === 'ko' ? "✨ 평생 라이선스 활성화됨 (무제한)" : "✨ Lifetime License Active (Unlimited)";
+        pill.parentElement.className = "inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 mb-3";
+      } else {
+        pill.innerText = currentLang === 'ko' ? `🔥 무료 체험 ${credits}회 남음` : `🔥 ${credits} Free Conversions Remaining`;
+        if (credits === 0) {
+          pill.parentElement.className = "inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-rose-500/20 text-rose-300 border border-rose-500/30 mb-3 animate-pulse";
+        }
+      }
+    }
+
+    // Paywall Modal Control
+    const paywallModal = document.getElementById('paywallModal');
+    function showPaywallModal() {
+      paywallModal.classList.remove('hidden');
+    }
+    function closePaywallModal() {
+      paywallModal.classList.add('hidden');
+    }
+
+    function activateLicenseKey() {
+      const key = document.getElementById('licenseKeyInput').value.trim();
+      const msg = document.getElementById('licenseKeyMsg');
+      if (key.length >= 8) {
+        localStorage.setItem(STORAGE_UNLOCKED, 'true');
+        msg.className = "text-[11px] mt-1.5 text-emerald-400";
+        msg.innerText = currentLang === 'ko' ? "성공: 라이선스가 활성화되었습니다!" : "Success: License activated!";
+        msg.classList.remove('hidden');
+        updateCreditDisplay();
+        setTimeout(() => closePaywallModal(), 1200);
+      } else {
+        msg.className = "text-[11px] mt-1.5 text-rose-400";
+        msg.innerText = currentLang === 'ko' ? "유효하지 않은 라이선스 키입니다." : "Invalid license key format.";
+        msg.classList.remove('hidden');
+      }
+    }
+
+    // 2. Multilingual Dictionary (i18n)
     const i18n = {
       en: {
         navEngine: "Reconciliation Engine",
@@ -756,7 +735,6 @@
         metric1: "< 5.2s Avg. Conversion",
         metric2: "99.98% Parsing Accuracy",
         metric3: "Zero Persistent Disk Footprint",
-        dropzonePreLabel: "Live Ingestor",
         dropzoneMainTitle: "Convert Your Bank Statement",
         dropzoneMainSub: "Files are analyzed in memory and immediately discarded.",
         dropzonePromptTitle: 'Drag & drop PDF / image statement or <span class="text-blue-400 underline decoration-blue-500/50 underline-offset-4 hover:text-blue-300">Browse files</span> (up to 20MB)',
@@ -773,11 +751,11 @@
         whyTitle: "Why Traditional OCR Fails at Bank Statements",
         whySub: "Generic OCR engines blindly read characters without balancing the underlying books. BankFlow enforces continuous mathematical proofs.",
         card1Title: "Continuous Reconciliation",
-        card1Body: "Continuous Reconciliation — starting to ending balance calculation. If a single digit or transaction is missed, the system flags the mathematical imbalance rather than outputting erroneous figures.",
+        card1Body: "Continuous Reconciliation — starting to ending balance calculation. If a single digit or transaction is missed, the system flags the mathematical imbalance.",
         card2Title: "Zero-Storage Privacy",
-        card2Body: "Processed purely in RAM. Never saved to disks, databases, or S3. Financial statements contain confidential accounts and counterparties that must never sit inside an unmonitored cloud bucket.",
+        card2Body: "Processed purely in RAM. Never saved to disks, databases, or S3. Financial statements contain confidential accounts that must never sit inside an unmonitored bucket.",
         card3Title: "Dual-Sheet Formatted Output",
-        card3Body: "Executive KPI summary + categorized transaction ledger with live Excel formulas. Every workbook arrives ready for QuickBooks, Xero, or financial audits without manual column reformatting.",
+        card3Body: "Executive KPI summary + categorized transaction ledger with live Excel formulas. Every workbook arrives ready for QuickBooks, Xero, or audits.",
         pricePre: "Lifetime License Model",
         priceTitle: "Pay Once. Reconcile Forever.",
         priceSub: "No recurring subscriptions. Buy credits once that never expire.",
@@ -793,7 +771,13 @@
         planProDesc: "Designed for fractional CFOs, bookkeepers, and accounting practices managing multi-client statements.",
         planProPayType: "/ one-time payment",
         btnBuyPro: "Get Bookkeeper Pass ($99)",
-        proFooterNote: "30-Day Money-Back Math Accuracy Guarantee"
+        proFooterNote: "30-Day Money-Back Math Accuracy Guarantee",
+        paywallBadge: "Free Limit Reached (3/3 Used)",
+        paywallTitle: "Unlock Unlimited Financial Extractions",
+        paywallDesc: "You've used all 3 free conversions. Get instant lifetime access with zero monthly subscriptions.",
+        paywallBtnBookkeeper: "Get Bookkeeper Pass ($99) — 3,000 Pages",
+        paywallBtnStarter: "Get Starter Pass ($39) — 500 Pages",
+        paywallKeyPrompt: "Already have a license key?"
       },
       ko: {
         navEngine: "검산 엔진 안내",
@@ -807,7 +791,6 @@
         metric1: "< 평균 변환 5.2초",
         metric2: "99.98% 파싱 정확도",
         metric3: "서버 디스크 저장 기록 0바이트",
-        dropzonePreLabel: "실시간 변환 엔진",
         dropzoneMainTitle: "통장 및 카드 거래명세서 업로드",
         dropzoneMainSub: "업로드된 파일은 메모리에서 즉시 분석되며 디스크에 저장되지 않습니다.",
         dropzonePromptTitle: 'PDF / 명세서 이미지를 끌어다 놓거나 <span class="text-blue-400 underline decoration-blue-500/50 underline-offset-4 hover:text-blue-300">파일 찾기</span> (최대 20MB)',
@@ -824,11 +807,11 @@
         whyTitle: "일반 OCR이 은행 명세서에서 무조건 실패하는 이유",
         whySub: "단순 텍스트 인식기는 장부의 앞뒤 잔액을 맞추지 못합니다. BankFlow는 수학적 무결성을 직접 증명합니다.",
         card1Title: "연속 잔액 무결성 검산",
-        card1Body: "기초 잔액부터 기말 잔액까지의 수학적 일치 여부를 매 행마다 추적합니다. 오타나 누락이 생기면 잘못된 엑셀을 내보내지 않고 경고 플래그를 즉시 띄웁니다.",
+        card1Body: "기초 잔액부터 기말 잔액까지의 수학적 일치 여부를 추적합니다. 오타나 누락이 발생하면 잘못된 엑셀 대신 경고 플래그를 표시합니다.",
         card2Title: "제로 스토리지(Zero-Storage)",
-        card2Body: "파일이 서버 디스크나 S3 데이터베이스에 1초도 머물지 않습니다. RAM 버퍼에서만 처리 후 변환 즉시 파기되므로 민감한 금융 거래 내역 유출이 원천 차단됩니다.",
+        card2Body: "파일이 서버 디스크나 S3 데이터베이스에 1초도 머물지 않습니다. RAM 버퍼에서만 처리 후 변환 즉시 파기됩니다.",
         card3Title: "2시트 프로페셔널 엑셀",
-        card3Body: "핵심 KPI 요약 시트와 동적 수식이 적용된 거래 원장 시트가 동시에 생성됩니다. 회계 프로그램(QuickBooks, Xero, 더존 등)에 즉시 임포트할 수 있습니다.",
+        card3Body: "핵심 KPI 요약 시트와 동적 수식이 적용된 거래 원장 시트가 동시에 생성되어 회계 프로그램에 즉시 임포트할 수 있습니다.",
         pricePre: "평생 라이선스 모델",
         priceTitle: "한 번 결제하고 평생 무제한 변환",
         priceSub: "매달 나가는 월 구독료 없음. 구매한 크레딧은 영구히 소멸되지 않습니다.",
@@ -844,7 +827,13 @@
         planProDesc: "여러 고객사의 대량 명세서를 한 번에 처리하고 장부를 관리하는 전문가 및 에이전시 전용 플랜입니다.",
         planProPayType: "/ 일회성 평생 결제",
         btnBuyPro: "북키퍼 패스 구매 ($99)",
-        proFooterNote: "30일 내 검산 오류 발생 시 100% 환불 보장"
+        proFooterNote: "30일 내 검산 오류 발생 시 100% 환불 보장",
+        paywallBadge: "무료 체험 3회 소진 완료",
+        paywallTitle: "평생 무제한 금융 명세서 변환 활성화",
+        paywallDesc: "3회 무료 체험이 모두 완료되었습니다. 매달 나가는 구독료 없이 일회성 결제로 평생 소장하세요.",
+        paywallBtnBookkeeper: "북키퍼 패스 구매 ($99) — 3,000페이지",
+        paywallBtnStarter: "스타터 패스 구매 ($39) — 500페이지",
+        paywallKeyPrompt: "이미 라이선스 키가 있으신가요?"
       }
     };
 
@@ -875,7 +864,6 @@
       document.getElementById('metric1').innerText = d.metric1;
       document.getElementById('metric2').innerText = d.metric2;
       document.getElementById('metric3').innerText = d.metric3;
-      document.getElementById('dropzonePreLabel').innerText = d.dropzonePreLabel;
       document.getElementById('dropzoneMainTitle').innerText = d.dropzoneMainTitle;
       document.getElementById('dropzoneMainSub').innerText = d.dropzoneMainSub;
       document.getElementById('dropzonePromptTitle').innerHTML = d.dropzonePromptTitle;
@@ -913,9 +901,17 @@
       document.getElementById('planProPayType').innerText = d.planProPayType;
       document.getElementById('btnBuyPro').innerText = d.btnBuyPro;
       document.getElementById('proFooterNote').innerText = d.proFooterNote;
+      
+      document.getElementById('paywallBadge').innerText = d.paywallBadge;
+      document.getElementById('paywallTitle').innerText = d.paywallTitle;
+      document.getElementById('paywallDesc').innerText = d.paywallDesc;
+      document.getElementById('paywallBtnBookkeeper').innerText = d.paywallBtnBookkeeper;
+      document.getElementById('paywallBtnStarter').innerText = d.paywallBtnStarter;
+      document.getElementById('paywallKeyPrompt').innerText = d.paywallKeyPrompt;
+
+      updateCreditDisplay();
     }
 
-    // 기본 언어: 해외 타깃 기본(EN), 브라우저 한국어 감지 시 자동 KO
     document.addEventListener('DOMContentLoaded', () => {
       const userLang = navigator.language || navigator.userLanguage || '';
       if (userLang.includes('ko')) {
@@ -923,12 +919,12 @@
       } else {
         setLanguage('en');
       }
+      updateCreditDisplay();
     });
 
-    // 2. 백엔드(FastAPI + Gemini API) 실제 파일 변환 로직
+    // 3. Upload & Conversion Logic
     const dropzoneArea = document.getElementById('dropzoneArea');
     const statementFileInput = document.getElementById('statementFileInput');
-    
     const stateDefault = document.getElementById('stateDefault');
     const stateProcessing = document.getElementById('stateProcessing');
     const stateSuccess = document.getElementById('stateSuccess');
@@ -943,7 +939,6 @@
 
     const resetDropzoneBtn = document.getElementById('resetDropzoneBtn');
     const manualDownloadBtn = document.getElementById('manualDownloadBtn');
-
     const successFileName = document.getElementById('successFileName');
     const successTxnCount = document.getElementById('successTxnCount');
     const successAuditBadge = document.getElementById('successAuditBadge');
@@ -952,8 +947,14 @@
     let currentDownloadFileName = 'BankFlow_Reconciled_Ledger.xlsx';
 
     dropzoneArea.addEventListener('click', (e) => {
-      if (e.target.closest('button') || e.target.closest('a')) return;
+      if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input')) return;
       if (stateDefault.classList.contains('hidden')) return;
+
+      // 3회 소진 검사
+      if (getRemainingCredits() <= 0) {
+        showPaywallModal();
+        return;
+      }
       statementFileInput.click();
     });
 
@@ -982,6 +983,10 @@
     dropzoneArea.addEventListener('drop', (e) => {
       const files = e.dataTransfer.files;
       if (files && files[0]) {
+        if (getRemainingCredits() <= 0) {
+          showPaywallModal();
+          return;
+        }
         handleRealFileUpload(files[0]);
       }
     });
@@ -1010,6 +1015,11 @@
     });
 
     async function handleRealFileUpload(file) {
+      if (getRemainingCredits() <= 0) {
+        showPaywallModal();
+        return;
+      }
+
       stateDefault.classList.add('hidden');
       stateProcessing.classList.remove('hidden');
       stateSuccess.classList.add('hidden');
@@ -1066,6 +1076,10 @@
         lucide.createIcons();
         progressBar.style.width = "100%";
 
+        // 1회 크레딧 차감
+        useOneCredit();
+
+        // 자동 엑셀 다운로드
         const a = document.createElement('a');
         a.href = currentDownloadedBlobUrl;
         a.download = currentDownloadFileName;
