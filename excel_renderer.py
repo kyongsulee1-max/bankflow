@@ -35,6 +35,32 @@ def render_bankflow_excel(parsed_data: dict, audit_result: dict) -> io.BytesIO:
 
     info = parsed_data.get("statement_info", {})
     txs = parsed_data.get("transactions", [])
+
+    # -------------------------------------------------------------
+    # 통화 자동 감지 및 서식 동적 매핑
+    # -------------------------------------------------------------
+    raw_curr = str(info.get("currency", "USD")).strip().upper()
+    CURRENCY_CONFIG = {
+        "USD": ("$", "$#,##0.00"),
+        "EUR": ("€", "€#,##0.00"),
+        "GBP": ("£", "£#,##0.00"),
+        "CAD": ("$", "$#,##0.00"),
+        "AUD": ("$", "$#,##0.00"),
+        "KRW": ("₩", "₩#,##0"),
+        "JPY": ("¥", "¥#,##0"),
+        "BDT": ("৳", "৳#,##0.00"),
+        "INR": ("₹", "₹#,##0.00"),
+        "SGD": ("$", "$#,##0.00"),
+        "HKD": ("$", "$#,##0.00"),
+    }
+
+    clean_curr = "USD"
+    for code in CURRENCY_CONFIG.keys():
+        if code in raw_curr:
+            clean_curr = code
+            break
+
+    curr_sym, curr_fmt = CURRENCY_CONFIG.get(clean_curr, ("$", "$#,##0.00"))
     
     # -------------------------------------------------------------
     # Sheet 1: Executive Summary & Reconciliation Dashboard
@@ -53,7 +79,7 @@ def render_bankflow_excel(parsed_data: dict, audit_result: dict) -> io.BytesIO:
         ("Financial Institution:", info.get("bank_name", "N/A")),
         ("Account Identifier:", info.get("account_number_masked", "****-****-****-XXXX")),
         ("Statement Period:", info.get("statement_period", "N/A")),
-        ("Base Currency:", info.get("currency", "USD ($)")),
+        ("Base Currency:", f"{clean_curr} ({curr_sym})"),
         ("Audit Integrity:", "PERFECT MATCH (0.00 Variance)" if audit_result.get("is_balanced") else f"WARNING: Variance {audit_result.get('discrepancy')}")
     ]
     
@@ -63,8 +89,8 @@ def render_bankflow_excel(parsed_data: dict, audit_result: dict) -> io.BytesIO:
         ws1[f"B{idx}"] = v
         ws1[f"B{idx}"].font = Font(name="Arial", size=10, bold=("Audit" in k), color=GREEN_TEXT if "PERFECT" in str(v) else "0F172A")
 
-    # KPI 및 검산 요약 테이블 헤더
-    headers_kpi = ["Reconciliation Metric", "Amount (USD)", "Formula / Audit Logic"]
+    # KPI 및 검산 요약 테이블 헤더 (동적 통화 반영)
+    headers_kpi = ["Reconciliation Metric", f"Amount ({clean_curr})", "Formula / Audit Logic"]
     for c_i, h in enumerate(headers_kpi, start=1):
         c = ws1.cell(row=10, column=c_i, value=h)
         c.font = Font(name="Arial", size=10, bold=True, color="FFFFFF")
@@ -76,15 +102,15 @@ def render_bankflow_excel(parsed_data: dict, audit_result: dict) -> io.BytesIO:
     end_bal = info.get("ending_balance", 0.0)
     last_tx_row = len(txs) + 1
 
-    # KPI 항목 정의 (엑셀 함수 동적 주입)
+    # KPI 항목 정의 (동적 통화 서식 적용)
     kpis = [
-        ("Starting Balance (Period Open)", start_bal, "Direct Statement Verification", "$#,##0.00"),
-        ("Total Deposits (Inflow)", f"=SUM(Transactions!D2:D{last_tx_row})", "=SUM(Transactions!Inflow)", "$#,##0.00"),
-        ("Total Withdrawals (Outflow)", f"=SUM(Transactions!C2:C{last_tx_row})", "=SUM(Transactions!Outflow)", "$#,##0.00"),
-        ("Net Cash Flow for Period", "=B12-B13", "=Total Deposits - Total Withdrawals", "$#,##0.00"),
-        ("Calculated Ending Balance", "=B11+B14", "=Starting Balance + Net Cash Flow", "$#,##0.00"),
-        ("Reported Ending Balance", end_bal, "Bank Stated Closing Balance", "$#,##0.00"),
-        ("Reconciliation Variance", "=B15-B16", "=Calculated Ending - Reported Ending", "$#,##0.00")
+        ("Starting Balance (Period Open)", start_bal, "Direct Statement Verification", curr_fmt),
+        ("Total Deposits (Inflow)", f"=SUM(Transactions!D2:D{last_tx_row})", "=SUM(Transactions!Inflow)", curr_fmt),
+        ("Total Withdrawals (Outflow)", f"=SUM(Transactions!C2:C{last_tx_row})", "=SUM(Transactions!Outflow)", curr_fmt),
+        ("Net Cash Flow for Period", "=B12-B13", "=Total Deposits - Total Withdrawals", curr_fmt),
+        ("Calculated Ending Balance", "=B11+B14", "=Starting Balance + Net Cash Flow", curr_fmt),
+        ("Reported Ending Balance", end_bal, "Bank Stated Closing Balance", curr_fmt),
+        ("Reconciliation Variance", "=B15-B16", "=Calculated Ending - Reported Ending", curr_fmt)
     ]
 
     for r_idx, (metric, val, desc, fmt) in enumerate(kpis, start=11):
@@ -113,7 +139,7 @@ def render_bankflow_excel(parsed_data: dict, audit_result: dict) -> io.BytesIO:
     ws2.views.sheetView[0].showGridLines = True
     ws2.freeze_panes = "A2" # 스크롤 시 헤더 고정
 
-    tx_headers = ["Date", "Description", "Outflow (Withdrawal)", "Inflow (Deposit)", "Category", "Running Balance", "Integrity"]
+    tx_headers = ["Date", "Description", f"Outflow ({clean_curr})", f"Inflow ({clean_curr})", "Category", "Running Balance", "Integrity"]
     ws2.row_dimensions[1].height = 24
 
     for c_i, h in enumerate(tx_headers, start=1):
@@ -136,12 +162,12 @@ def render_bankflow_excel(parsed_data: dict, audit_result: dict) -> io.BytesIO:
         ws2.cell(row=i, column=2, value=t.get("description", "")).alignment = Alignment(horizontal="left", vertical="center")
 
         c_out = ws2.cell(row=i, column=3, value=outflow)
-        c_out.number_format = "$#,##0.00"
+        c_out.number_format = curr_fmt
         c_out.font = Font(name="Arial", size=10, color=RED_TEXT if outflow > 0 else "0F172A")
         c_out.alignment = Alignment(horizontal="right", vertical="center")
 
         c_in = ws2.cell(row=i, column=4, value=inflow)
-        c_in.number_format = "$#,##0.00"
+        c_in.number_format = curr_fmt
         c_in.font = Font(name="Arial", size=10, bold=(inflow > 0), color=GREEN_TEXT if inflow > 0 else "0F172A")
         c_in.alignment = Alignment(horizontal="right", vertical="center")
 
@@ -150,7 +176,7 @@ def render_bankflow_excel(parsed_data: dict, audit_result: dict) -> io.BytesIO:
         # 동적 잔액 계산 수식 주입 (첫 행은 Summary B11 참조, 이후는 전일 잔고 + 입금 - 출금)
         bal_formula = f"='Executive Summary'!B11 + D{i} - C{i}" if i == 2 else f"=F{i-1} + D{i} - C{i}"
         c_bal = ws2.cell(row=i, column=6, value=bal_formula)
-        c_bal.number_format = "$#,##0.00"
+        c_bal.number_format = curr_fmt
         c_bal.font = Font(name="Arial", size=10, bold=True)
         c_bal.alignment = Alignment(horizontal="right", vertical="center")
 
@@ -169,15 +195,15 @@ def render_bankflow_excel(parsed_data: dict, audit_result: dict) -> io.BytesIO:
     ws2.cell(row=tot_row, column=1, value="TOTALS").font = Font(name="Arial", size=10, bold=True, color=NAVY_HEADER)
     ws2.cell(row=tot_row, column=1).alignment = Alignment(horizontal="center", vertical="center")
     
-    ws2.cell(row=tot_row, column=3, value=f"=SUM(C2:C{tot_row-1})").number_format = "$#,##0.00"
+    ws2.cell(row=tot_row, column=3, value=f"=SUM(C2:C{tot_row-1})").number_format = curr_fmt
     ws2.cell(row=tot_row, column=3).font = Font(name="Arial", size=10, bold=True, color=RED_TEXT)
     ws2.cell(row=tot_row, column=3).alignment = Alignment(horizontal="right", vertical="center")
 
-    ws2.cell(row=tot_row, column=4, value=f"=SUM(D2:D{tot_row-1})").number_format = "$#,##0.00"
+    ws2.cell(row=tot_row, column=4, value=f"=SUM(D2:D{tot_row-1})").number_format = curr_fmt
     ws2.cell(row=tot_row, column=4).font = Font(name="Arial", size=10, bold=True, color=GREEN_TEXT)
     ws2.cell(row=tot_row, column=4).alignment = Alignment(horizontal="right", vertical="center")
 
-    ws2.cell(row=tot_row, column=6, value=f"=F{tot_row-1}").number_format = "$#,##0.00"
+    ws2.cell(row=tot_row, column=6, value=f"=F{tot_row-1}").number_format = curr_fmt
     ws2.cell(row=tot_row, column=6).font = Font(name="Arial", size=10, bold=True, color=NAVY_HEADER)
     ws2.cell(row=tot_row, column=6).alignment = Alignment(horizontal="right", vertical="center")
 
