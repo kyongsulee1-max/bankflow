@@ -25,7 +25,9 @@ if not GEMINI_API_KEY:
     print("WARNING: GEMINI_API_KEY is not set. Please check your .env file.")
 
 ai_client = genai.Client(api_key=GEMINI_API_KEY) if GEMINI_API_KEY else None
-AI_MODEL_ID = "gemini-3.6-flash"
+
+# 모델 우선순위 순차 폴백 목록 (503 과부하 또는 일시적 장애 대비)
+TARGET_MODELS = ["gemini-3.6-flash", "gemini-2.5-flash", "gemini-1.5-flash"]
 
 app = FastAPI(
     title="BankFlow Core Engine",
@@ -167,26 +169,36 @@ async def convert_statement(file: UploadFile = File(...)):
             detail="File size exceeds the 20MB limit."
         )
 
-    # Gemini Vision AI 구조화 파싱 호출
-    try:
-        response = ai_client.models.generate_content(
-            model=AI_MODEL_ID,
-            contents=[
-                types.Part.from_bytes(data=file_bytes, mime_type=file.content_type),
-                "Extract all transactional rows and reconciliation summary according to the schema."
-            ],
-            config=types.GenerateContentConfig(
-                system_instruction=BANKFLOW_SYSTEM_PROMPT,
-                response_mime_type="application/json",
-                response_schema=BANK_STATEMENT_SCHEMA,
-                temperature=0.1
+    # Gemini Vision AI 순차 폴백(Fallback) 구조화 파싱 호출
+    parsed_json = None
+    last_error = None
+
+    for model_name in TARGET_MODELS:
+        try:
+            response = ai_client.models.generate_content(
+                model=model_name,
+                contents=[
+                    types.Part.from_bytes(data=file_bytes, mime_type=file.content_type),
+                    "Extract all transactional rows and reconciliation summary according to the schema."
+                ],
+                config=types.GenerateContentConfig(
+                    system_instruction=BANKFLOW_SYSTEM_PROMPT,
+                    response_mime_type="application/json",
+                    response_schema=BANK_STATEMENT_SCHEMA,
+                    temperature=0.1
+                )
             )
-        )
-        parsed_json = json.loads(response.text)
-    except Exception as e:
+            parsed_json = json.loads(response.text)
+            break  # 파싱 성공 시 루프 탈출
+        except Exception as e:
+            last_error = e
+            print(f"[경고] {model_name} 호출 실패 (다음 순위 모델로 전환): {str(e)}")
+            continue
+
+    if not parsed_json:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"AI Vision extraction error: {str(e)}"
+            detail=f"모든 AI 모델 호출 실패 (최종 오류: {str(last_error)})"
         )
 
     # 2중 수학적 무결성 검산 실행
